@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Reason;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -19,7 +22,10 @@ class ReportController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $statuses = Status::all();
+        $reasons = Reason::all();
+        return view('reports.create', compact('categories', 'statuses', 'reasons'));
     }
 
     /**
