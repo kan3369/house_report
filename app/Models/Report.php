@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -57,5 +58,38 @@ class Report extends Model
     public function imagePath(): Attribute
     {
         return Attribute::get(fn() => Storage::url('images/reports/' . $this->image));
+    }
+
+    /* 
+     * Scope 
+     */
+    public function scopeSearch(Builder $query, $params): void
+    {
+        // カテゴリー検索 checkboxの値は配列なのでwhereInで検索
+        if (!empty($params['category_id'])) {
+            $query->whereIn('category_id', $params['category_id']);
+        }
+
+        // 対応状況検索 リレーション先のカラムで検索するのでwhereHasを使う
+        if (!empty($params['status_id'])) {
+            $query->whereHas('latestHistory', function ($q) use ($params) {
+                // checkboxの値は配列なのでwhereInで検索
+                $q->whereIn('status_id', $params['status_id']);
+            });
+        }
+        // 報告日検索 範囲検索
+        if (!empty($params['reported_start_date'])) {
+            $query->where('reported_at', '>=', $params['reported_start_date']);
+        }
+        if (!empty($params['reported_end_date'])) {
+            $query->where('reported_at', '<=', $params['reported_end_date'] . " 23:59:59");
+        }
+        // 完了検索 範囲検索
+        if (!empty($params['completed_start_date'])) {
+            $query->whereRelation('latestHistory', 'completed_at', '>=', $params['completed_start_date'] . " 00:00:00");
+        }
+        if (!empty($params['completed_end_date'])) {
+            $query->whereRelation('latestHistory', 'completed_at', '<=', $params['completed_end_date'] . " 23:59:59");
+        }
     }
 }
