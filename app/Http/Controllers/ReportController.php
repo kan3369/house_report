@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreReportRequest;
+use App\Http\Requests\UpdateReportRequest;
 use App\Models\Category;
 use App\Models\Reason;
 use App\Models\Report;
@@ -37,7 +39,8 @@ class ReportController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)  // 送信された情報はRequestクラスのインスタンスとして$requestを定義
+    // 送信された情報はRequestクラスのインスタンスとして$requestを定義
+    public function store(StoreReportRequest $request)
     {
         $report = new Report($request->all());
 
@@ -89,7 +92,7 @@ class ReportController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Report $report)
+    public function update(UpdateReportRequest $request, Report $report)
     {
         // 履歴を受け取ったデータで上書き
         $history = $report->latestHistory->fill($request->all());

@@ -7,8 +7,8 @@
             @endif
             <div class="">
                 <h2 class="">{{ __('場所') }}</h2>
-                <input type="hidden" name="latitude" id="latitude">
-                <input type="hidden" name="longitude" id="longitude">
+                <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude') }}">
+                <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude') }}">
                 <div class="mt-0 col-span-2">
                     <div class="w-full h-80 border border-solid border-black">
                         <div class="h-full" id="map"></div>
@@ -22,7 +22,7 @@
                     @foreach ($categories as $category)
                         <label>
                             <input type="radio" name="category_id" value="{{ $category->id }}"
-                                @checked($category->id == $report?->category_id)>
+                                @checked(old('category_id', $report?->category_id) == $category->id)>
                             {{ $category->name }}
                         </label>
                     @endforeach
@@ -44,7 +44,7 @@
             <div class="">
                 <h2 class="">{{ __('内容') }}</h2>
                 <div class="">
-                    <textarea name="detail" class="w-full h-full">{{ $report?->detail }}</textarea>
+                    <textarea name="detail" class="w-full h-full">{{ old('detail', $report?->detail) }}</textarea>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
                     <div class="">
                         <div class="">
                             <input type="datetime-local" name="reported_at" class="w-full"
-                                value="{{ $report?->reported_at }}">
+                                value="{{ old('reported_at', $report?->reported_at) }}">
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                         <div class="">
                             <select name="status_id" class="">
                                 @foreach ($statuses as $status)
-                                    <option value="{{ $status->id }}" @selected($status->id == $report?->latestHistory->status_id)>
+                                    <option value="{{ $status->id }}" @selected(old('status_id', $report?->latestHistory->status_id) == $status->id)>
                                         {{ $status->name }}
                                     </option>
                                 @endforeach
@@ -85,7 +85,7 @@
                             <select name="reason_id" class="">
                                 <option></option>
                                 @foreach ($reasons as $reason)
-                                    <option value="{{ $reason->id }}" @selected($reason->id == $report?->latestHistory->reason_id)>
+                                    <option value="{{ $reason->id }}" @selected(old('reason_id', $report?->latestHistory->reason_id) == $reason->id)>
                                         {{ $reason->name }}
                                     </option>
                                 @endforeach
@@ -98,7 +98,7 @@
             <div class="">
                 <h2 class="">{{ __('コメント') }}</h2>
                 <div class="">
-                    <textarea name="comment" class="w-full h-full">{{ $report?->latestHistory->comment }}</textarea>
+                    <textarea name="comment" class="w-full h-full">{{ old('comment', $report?->latestHistory->comment) }}</textarea>
                 </div>
             </div>
 
@@ -108,7 +108,7 @@
                     <div class="">
                         <div class="">
                             <input type="date" name="completed_at" class="w-full"
-                                value="{{ $report?->latestHistory->completed_at?->format('Y-m-d') }}">
+                                value="{{ old('completed_at', $report?->latestHistory->completed_at?->format('Y-m-d')) }}">
                         </div>
                     </div>
                 </div>
