@@ -10,6 +10,8 @@ use App\Models\Reason;
 use App\Models\Report;
 use App\Models\ReportStatusHistory;
 use App\Models\Status;
+use App\Notifications\ReportCreatedToStaff;
+use App\Notifications\ReportUpdatedToGuest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -72,6 +74,9 @@ class ReportController extends Controller
             return back()->withInput()->withErrors($e->getMessage());
         }
 
+        // カテゴリーごとの通知先にメールを送信する
+        $report->category->notify(new ReportCreatedToStaff($report));
+
         return redirect()->route('reports.index');
     }
 
@@ -113,6 +118,12 @@ class ReportController extends Controller
             $history->updated_at = now();
             $history->save();
         }
+
+        // 状況が更新された場合は報告の連絡先にメールを送信する
+        if ($history->status_id != $history->getOriginal()['status_id']) {
+            $report->notify(new ReportUpdatedToGuest($report));
+        }
+
         return redirect()->route('reports.index');
     }
 
