@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ReportController::class, 'index'])->name('reports.index');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,6 +31,16 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::resource('reports', ReportController::class);
+// 空き家オーナー
+Route::resource('reports', ReportController::class)
+    ->only(['show', 'create', 'store']);
+
+// 職員(一般・管理者)
+Route::resource('reports', ReportController::class)
+    ->only(['edit', 'update'])
+    ->middleware(['auth']);
+
+// 職員(管理者)
 Route::resource('users', UserController::class)
-    ->only(['index', 'edit', 'update']);
+    ->only(['index', 'edit', 'update'])
+    ->middleware(['auth', 'can:admin']);

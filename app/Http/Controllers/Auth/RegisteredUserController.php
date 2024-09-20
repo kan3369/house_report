@@ -32,19 +32,20 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'is_admin' => ['nullable', 'boolean'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make(explode("@", $request->email)[0]),
+            'is_admin' => $request->is_admin,
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+        session()->flash('notice', 'ユーザーを登録しました。');
 
         return redirect(RouteServiceProvider::HOME);
     }
