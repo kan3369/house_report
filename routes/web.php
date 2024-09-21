@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ReportController::class, 'index'])->name('reports.index');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,4 +29,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+// 空き家オーナー
+Route::resource('reports', ReportController::class)
+    ->only(['show', 'create', 'store']);
+
+// 職員(一般・管理者)
+Route::resource('reports', ReportController::class)
+    ->only(['edit', 'update'])
+    ->middleware(['auth']);
+
+// 職員(管理者)
+Route::resource('users', UserController::class)
+    ->only(['index', 'edit', 'update'])
+    ->middleware(['auth', 'can:admin']);

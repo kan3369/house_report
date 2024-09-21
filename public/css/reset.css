@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* ===================== reset ==== */
+html, body, div, iframe, h1, h2, h3, h4, h5, h6, p, a, img, small, dl, dt, dd, ol, ul, li, form, label, table, tr, th, td, article, footer, header, nav, section, figure ,address{margin: 0;padding: 0;border: 0;font-size: 100%; font-style: normal;}
+input, textarea {margin: 0; resize: none; font-size: 16px; padding: 6px;box-sizing: border-box;}
+ol, ul {list-style: none;}
+table {border-collapse: collapse;border-spacing: 0;}
+a {text-decoration: none;color: inherit;}
+a:focus {outline: none;}
+img {max-width: 100%;height: auto;}
+html {font-family: Helvetica , Arial , 'Hiragino Kaku Gothic ProN' , 'メイリオ' , Meiryo , sans-serif;-webkit-text-size-adjust: 100%;line-height: 1.7;-webkit-font-smoothing: antialiased;}
+.gothic {font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;}
+.mincyo {font-family:'ヒラギノ明朝 Pro W3', 'Hiragino Mincho ProN', '游明朝', 'Yu Mincho', '游明朝体', 'YuMincho', 'HG明朝E', 'ＭＳ Ｐ明朝', 'ＭＳ 明朝', 'MS PMincho', serif;}
+/* ===================== utility ==== */
+.u_of {overflow: hidden;white-space: nowrap;text-indent: 110%;}
+.u_cf::after {content: '';clear: both;display: block;}
+.text_link{color:blue; text-decoration: underline; transition: all .3s;}
+.text_link:hover{color: aliceblue;}
+.touch_anime{transition: opacity .3s;}
+@media all and (min-width:768px) {.touch_anime:not(.nopacity):hover{opacity: .7;}}
+@media all and (max-width:767px) {.touch_anime:not(.nopacity).touch__start{opacity: .7;}}
+.scroll_anime{transition: all 1s;}
+.scroll_anime.fuwa{opacity:0; transform: scale(.95);}
+.scroll_anime.fuwa.scroll__start{opacity:1;transform: scale(1)}
+.scroll_anime.fuwa-up{transform: translateY(15px);opacity:0;}
+.scroll_anime.fuwa-up.scroll__start{transform: translateY(0px);opacity:1;}
+.scroll_anime.fuwa-down{transform: translateY(-15px);opacity:0;}
+.scroll_anime.fuwa-down.scroll__start{transform: translateY(0px);opacity:1;}
+.scroll_anime.fuwa-right{transform: translateX(-15px);opacity:0;}
+.scroll_anime.fuwa-right.scroll__start{transform: translateX(0px);opacity:1;}
+.scroll_anime.fuwa-left{transform: translateX(15px);opacity:0;}
+.scroll_anime.fuwa-left.scroll__start{transform: translateX(0px);opacity:1;}
