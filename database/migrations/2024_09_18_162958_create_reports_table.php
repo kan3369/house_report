@@ -16,9 +16,13 @@ return new class extends Migration
             $table->foreignId('category_id')
                 ->constrained();
             $table->string('image');
-            $table->float('latitude', 10, 7);
-            $table->float('longitude', 10, 7);
-            $table->text('detail');
+            $table->text('property');
+            $table->string('address');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->string('property_number');
+            $table->date('work_date');
+            $table->text('detail')->nullable();;
             $table->string('email')->nullable();
             $table->string('contact')->nullable();
             $table->timestamp('reported_at')->useCurrent();

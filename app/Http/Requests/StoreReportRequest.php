@@ -48,7 +48,7 @@ class StoreReportRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'category_id'   => 'カテゴリー',
+            'category_id'   => '報告者',
             'image'         => '写真',
             'location'      => '場所',
             'detail'        => '内容',

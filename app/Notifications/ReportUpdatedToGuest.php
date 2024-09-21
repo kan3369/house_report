@@ -37,7 +37,7 @@ class ReportUpdatedToGuest extends Notification
     {
         return (new MailMessage)
             ->subject('報告の内容が更新されました')
-            ->line("カテゴリー: " . $this->report->category->name)
+            ->line("報告者: " . $this->report->category->name)
             ->line("緯度: " . $this->report->latitude)
             ->line("経度: " . $this->report->longitude)
             ->line("内容: " . $this->report->detail)

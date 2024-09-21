@@ -74,7 +74,7 @@ class ReportController extends Controller
             return back()->withInput()->withErrors($e->getMessage());
         }
 
-        // カテゴリーごとの通知先にメールを送信する
+        // 報告者ごとの通知先にメールを送信する
         $report->category->notify(new ReportCreatedToStaff($report));
 
         return redirect()->route('reports.index');

@@ -14,11 +14,9 @@ class StatusSeeder extends Seeder
     public function run(): void
     {
         DB::table('statuses')->insert([
-            ['name' => '受付前'],
-            ['name' => '受付'],
+            ['name' => '未対応'],
             ['name' => '対応中'],
             ['name' => '対応済み'],
-            ['name' => '非対応'],
         ]);
     }
 }

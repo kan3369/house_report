@@ -9,7 +9,7 @@
             <form action="{{ route('reports.index') }}">
                 <div class="grid grid-cols-3 gap-1 p-6">
                     <div class="col-span-1">
-                        カテゴリー
+                        報告者
                     </div>
                     <div class="col-span-2">
                         <div class="grid grid-cols-4 gap-6">
@@ -75,7 +75,7 @@
                     <thead class="sticky top-0 bg-gray-100">
                         <tr>
                             <th></th>
-                            <th>カテゴリー</th>
+                            <th>報告者</th>
                             <th>対応状態</th>
                             <th>非対応理由</th>
                             <th>報告日</th>

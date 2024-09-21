@@ -17,7 +17,7 @@
             </div>
 
             <div class="">
-                <h2 class="">{{ __('カテゴリー') }}</h2>
+                <h2 class="">{{ __('報告者') }}</h2>
                 <div class="">
                     @foreach ($categories as $category)
                         <label>

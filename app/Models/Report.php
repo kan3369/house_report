@@ -67,7 +67,7 @@ class Report extends Model
      */
     public function scopeSearch(Builder $query, $params): void
     {
-        // カテゴリー検索 checkboxの値は配列なのでwhereInで検索
+        // 報告者検索 checkboxの値は配列なのでwhereInで検索
         if (!empty($params['category_id'])) {
             $query->whereIn('category_id', $params['category_id']);
         }
