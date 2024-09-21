@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="col-span-1">
-                        報告日
+                        実施日
                     </div>
                     <input type="date" name="reported_start_date" class="py-0"
                         value="{{ old('reported_start_date',request()->has('reported_start_date')? request()->query('reported_start_date'): now()->addMonth(-1)->format('Y-m-d')) }}">
@@ -45,7 +45,7 @@
                         value="{{ old('reported_end_date', request()->query('reported_end_date')) }}">
                     <div class="flex mt-6">
                         <div class="border border-solid border-black p-1">
-                            <input type="submit" value="再検索">
+                            <input type="submit" value="検索">
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,8 @@
                             <th></th>
                             <th>報告者</th>
                             <th>対応状態</th>
-                            <th>報告日</th>
+                            <th>実施日</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -77,7 +78,7 @@
                                 </td>
                                 <td>{{ $report->category_name }}</td>
                                 <td>{{ $report->status_name }}</td>
-                                <td>{{ $report->reported_at->format('Y/m/d') }}</td>
+                                <td>{{ $report->latestHistory->reported_at->format('Y/m/d') }}</td>
                                 <td>
                                     {{ $report->latestHistory->completed_at?->format('Y/m/d') }}
                                 </td>
@@ -86,6 +87,14 @@
                                         <div
                                             class="border border-solid border-black py-1 px-3 rounded-md hover:bg-gray-300">
                                             編集
+                                        </div>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ route('reports.show', $report) }}">
+                                        <div
+                                            class="border border-solid border-black py-1 px-3 rounded-md hover:bg-gray-300">
+                                            詳細
                                         </div>
                                     </a>
                                 </td>

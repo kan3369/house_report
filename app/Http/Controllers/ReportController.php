@@ -51,9 +51,12 @@ class ReportController extends Controller
     {
         $report = new Report($request->all());
 
+
         $file = $request->file('image');
         // ファイル名だけだと、重複の可能性があるのでランダムな値を付与
         $report->image = \Str::orderedUuid() . '_' . $file->getClientOriginalName();
+
+
 
         DB::beginTransaction();
         try {
@@ -85,7 +88,11 @@ class ReportController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // IDに基づいて報告を取得
+        $report = Report::with('latestHistory', 'category')->findOrFail($id);
+
+        // 詳細ビューを返す
+        return view('reports.show', compact('report'));
     }
 
     /**

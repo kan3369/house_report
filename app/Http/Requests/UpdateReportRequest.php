@@ -28,6 +28,8 @@ class UpdateReportRequest extends FormRequest
             "end_date" => "nullable|date|exclude_without:start_date|after_or_equal:start_date",
             "completed_at" => "nullable|required_if:status_id,4,5|prohibited_unless:status_id,4,5|date",
             "reason_id" => "nullable|required_if:status_id,5|prohibited_unless:status_id,5|exists:reasons,id",
+            "reported_at" => "nullable|date",
+
         ];
     }
 
@@ -41,6 +43,7 @@ class UpdateReportRequest extends FormRequest
             'end_date'      => '対応予定期間(終了)',
             'schedule_lte'  => '対応予定期間',
             'completed_at'  => '対応完了日',
+            'reported_at'   => '報告日',
         ];
     }
 

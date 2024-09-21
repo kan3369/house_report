@@ -21,7 +21,6 @@ return new class extends Migration
             $table->time('end_time');
             $table->string('property_name');
             $table->string('property_number');
-            $table->date('work_date');
             $table->text('detail')->nullable();;
             $table->string('email')->nullable();
             $table->string('contact')->nullable();

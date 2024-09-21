@@ -18,7 +18,7 @@ class ReportStatusHistory extends Model
         'address',
         'start_time',
         'end_time',
-        'work_date',
+        'reported_at',
         'property_name',
         'property_number',
         'detail',
@@ -27,6 +27,7 @@ class ReportStatusHistory extends Model
     protected $casts = [
         'start_time' => 'datetime',
         'end_time' => 'datetime',
+        'reported_at' => 'datetime',
         'completed_at' => 'datetime',
     ];
 

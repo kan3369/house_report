@@ -28,8 +28,6 @@ class Report extends Model
         'start_time',
         'end_time',
         'end_date',
-        'work_date',
-
     ];
 
     protected $casts = [

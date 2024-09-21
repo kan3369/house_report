@@ -34,8 +34,6 @@ class StoreReportRequest extends FormRequest
             "end_time" => 'required|date_format:H:i|after:start_time',
             "completed_at" => "nullable|required_if:status_id,4,5|prohibited_unless:status_id,4,5|date",
             "reason_id" => "nullable|required_if:status_id,5|prohibited_unless:status_id,5|exists:reasons,id",
-            'work_date' => 'required|date', 
-
         ];
     }
 
@@ -55,8 +53,6 @@ class StoreReportRequest extends FormRequest
             'end_time'      => '終了時間',
             'schedule_lte'  => '対応予定期間',
             'completed_at'  => '対応完了日',
-            'work_date'  => '実施日',
-
         ];
     }
     // public function messages()

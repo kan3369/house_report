@@ -27,9 +27,9 @@ return new class extends Migration
             $table->time('end_time');
             $table->string('property_name');
             $table->string('property_number');
-            $table->date('work_date');
-            $table->text('detail')->nullable();;
+            $table->text('detail')->nullable();
             $table->text('comment')->nullable();
+            $table->timestamp('reported_at')->useCurrent();
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->timestamp('completed_at')->nullable();
