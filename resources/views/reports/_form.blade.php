@@ -7,27 +7,37 @@
             @endif
             <div class="">
                 <h2 class="">{{ __('住所') }}</h2>
-                <input type="text" name="address" class="w-full">
+                <input type="text" name="address" class="w-full" value="{{ $report?->address }}">
             </div>
 
             <div class="">
                 <h2 class="">{{ __('物件名') }}</h2>
-                <input type="text" name="property_name" class="w-full">
+                <input type="text" name="property_name" class="w-full" value="{{ $report?->property_name }}">
             </div>
 
             <div class="">
                 <h2 class="">{{ __('物件ナンバー') }}</h2>
-                <input type="text" name="property_number" class="w-full">
+                <input type="text" name="property_number" class="w-full" value="{{ $report?->property_number }}">
             </div>
 
             <div class="">
                 <h2 class="">{{ __('写真（最大10枚まで）') }}</h2>
                 <div class="">
                     <label>
-                        <input type="file" name="image" id="imgFile" accept="image/*"
-                            class="hidden input-preview__src">
-                        <img id="imgPreview" class="w-full h-80 border border-solid border-black object-contain"
-                            src="{{ $report?->image_path ?? 'https://placehold.jp/15/ccc/000/300x300.png?text=%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%81%B8%E6%8A%9E%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84' }}">
+                        <!-- 複数ファイルを選択できるように name="image[]" と multiple を追加 -->
+                        <input type="file" name="image[]" id="imgFile" accept="image/*"
+                            class="hidden input-preview__src" multiple>
+                        <div id="imgPreviewContainer" class="grid grid-cols-2 gap-2">
+                            @if ($report?->images)
+                                @foreach ($report->images as $image)
+                                    <img class="w-full h-80 border border-solid border-black object-contain"
+                                        src="{{ Storage::url('images/reports/' . $image) }}">
+                                @endforeach
+                            @else
+                                <img id="imgPreview" class="w-full h-80 border border-solid border-black object-contain"
+                                    src="https://placehold.jp/15/ccc/000/300x300.png?text=%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%81%B8%E6%8A%9E%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84">
+                            @endif
+                        </div>
                     </label>
                 </div>
             </div>
@@ -71,8 +81,9 @@
 
             <div class="">
                 <h2 class="">{{ __('実施時間(開始〜完了)') }}</h2>
-                <input type="time" name="start_time">
-                <input type="time" name="end_time">
+                <input type="time" name="start_time"
+                    value="{{ $report?->latestHistory->start_time?->format('H:i') }}">
+                <input type="time" name="end_time" value="{{ $report?->latestHistory->end_time?->format('H:i') }}">
             </div>
 
             <div class="">
@@ -90,7 +101,7 @@
 
             <div class="">
                 <h2 class="">{{ __('メールアドレス') }}</h2>
-                <input type="email" name="email" class="w-full">
+                <input type="email" name="email" class="w-full" value="{{ $report?->email }}">
             </div>
 
             <div class="mt-10">

@@ -95,8 +95,7 @@ class ReportController extends Controller
     {
         $categories = Category::all();
         $statuses = Status::all();
-        $reasons = Reason::all();
-        return view('reports.edit', compact('categories', 'statuses', 'reasons', 'report'));
+        return view('reports.edit', compact('categories', 'statuses', 'report'));
     }
 
     /**
