@@ -17,7 +17,7 @@ class StoreReportRequest extends FormRequest
     public function prepareForValidation()
     {
         $this->merge([
-            'location' => (empty($this->latitude) || empty($this->longitude)) ? null : true,
+            'address' => (empty($this->latitude) || empty($this->longitude)) ? null : true,
         ]);
     }
 
@@ -31,7 +31,7 @@ class StoreReportRequest extends FormRequest
         return [
             "category_id" => "required|exists:categories,id",
             "image" => "required|image",
-            "location" => "required",
+            "address" => "required",
             "detail" => "required",
             "email" => "nullable|email:rfc,dns",
             "contact" => "nullable",
@@ -50,7 +50,7 @@ class StoreReportRequest extends FormRequest
         return [
             'category_id'   => '報告者',
             'image'         => '写真',
-            'location'      => '場所',
+            'address'      => '住所',
             'detail'        => '内容',
             'email'         => 'メールアドレス',
             'contact'       => '連絡先',

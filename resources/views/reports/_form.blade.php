@@ -6,31 +6,22 @@
                 @method($method)
             @endif
             <div class="">
-                <h2 class="">{{ __('場所') }}</h2>
-                <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude') }}">
-                <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude') }}">
-                <div class="mt-0 col-span-2">
-                    <div class="w-full h-80 border border-solid border-black">
-                        <div class="h-full" id="map"></div>
-                    </div>
-                </div>
+                <h2 class="">{{ __('住所') }}</h2>
+                <input type="text" name="address" class="w-full">
             </div>
 
             <div class="">
-                <h2 class="">{{ __('報告者') }}</h2>
-                <div class="">
-                    @foreach ($categories as $category)
-                        <label>
-                            <input type="radio" name="category_id" value="{{ $category->id }}"
-                                @checked(old('category_id', $report?->category_id) == $category->id)>
-                            {{ $category->name }}
-                        </label>
-                    @endforeach
-                </div>
+                <h2 class="">{{ __('物件名') }}</h2>
+                <input type="text" name="property" class="w-full">
             </div>
 
             <div class="">
-                <h2 class="">{{ __('写真') }}</h2>
+                <h2 class="">{{ __('物件ナンバー') }}</h2>
+                <input type="text" name="property_number" class="w-full">
+            </div>
+
+            <div class="">
+                <h2 class="">{{ __('写真（最大10枚まで）') }}</h2>
                 <div class="">
                     <label>
                         <input type="file" name="image" id="imgFile" accept="image/*"
@@ -45,18 +36,6 @@
                 <h2 class="">{{ __('内容') }}</h2>
                 <div class="">
                     <textarea name="detail" class="w-full h-full">{{ old('detail', $report?->detail) }}</textarea>
-                </div>
-            </div>
-
-            <div class="">
-                <h2 class="">{{ __('報告日') }}</h2>
-                <div class="">
-                    <div class="">
-                        <div class="">
-                            <input type="datetime-local" name="reported_at" class="w-full"
-                                value="{{ old('reported_at', $report?->reported_at) }}">
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -78,24 +57,6 @@
             </div>
 
             <div class="">
-                <h2 class="">{{ __('非対応理由') }}</h2>
-                <div class="">
-                    <div class="">
-                        <div class="">
-                            <select name="reason_id" class="">
-                                <option></option>
-                                @foreach ($reasons as $reason)
-                                    <option value="{{ $reason->id }}" @selected(old('reason_id', $report?->latestHistory->reason_id) == $reason->id)>
-                                        {{ $reason->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="">
                 <h2 class="">{{ __('コメント') }}</h2>
                 <div class="">
                     <textarea name="comment" class="w-full h-full">{{ old('comment', $report?->latestHistory->comment) }}</textarea>
@@ -103,15 +64,33 @@
             </div>
 
             <div class="">
-                <h2 class="">{{ __('対応完了日') }}</h2>
+                <h2 class="">{{ __('実施日') }}</h2>
+                <input type="date" name="reported_at" class="w-full"
+                    value="{{ old('reported_at', $report?->reported_at) }}">
+            </div>
+
+            <div class="">
+                <h2 class="">{{ __('実施時間(開始〜完了)') }}</h2>
+                <input type="time" name="start_time" required>
+                <input type="time" name="end_time" required>
+            </div>
+
+            <div class="">
+                <h2 class="">{{ __('報告者') }}</h2>
                 <div class="">
-                    <div class="">
-                        <div class="">
-                            <input type="date" name="completed_at" class="w-full"
-                                value="{{ old('completed_at', $report?->latestHistory->completed_at?->format('Y-m-d')) }}">
-                        </div>
-                    </div>
+                    @foreach ($categories as $category)
+                        <label>
+                            <input type="radio" name="category_id" value="{{ $category->id }}"
+                                @checked(old('category_id', $report?->category_id) == $category->id)>
+                            {{ $category->name }}
+                        </label>
+                    @endforeach
                 </div>
+            </div>
+
+            <div class="">
+                <h2 class="">{{ __('メールアドレス') }}</h2>
+                <input type="email" name="email" class="w-full">
             </div>
 
             <div class="mt-10">

@@ -19,9 +19,10 @@ class Report extends Model
 
     public $fillable = [
         'category_id',
-        'latitude',
-        'longitude',
+        'property_name',
+        'property_number',
         'detail',
+        'email',
         'reported_at',
     ];
 
