@@ -14,6 +14,12 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- original css -->
+    <link rel="stylesheet" media="all" href="{{ asset('/css/reset.css') }}">
+    <link rel="stylesheet" media="print , screen and (min-width:768px)" href="{{ asset('/css/style_pc.css') }}">
+    <link rel="stylesheet" media="screen and (max-width:767px)" href="{{ asset('/css/style_sp.css') }}.css">
+
 </head>
 
 <body class="font-sans antialiased">
