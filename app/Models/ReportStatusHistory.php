@@ -15,9 +15,14 @@ class ReportStatusHistory extends Model
         'status_id',
         'reason_id',
         'comment',
-        'start_date',
+        'address',
+        'start_time',
+        'end_time',
         'end_date',
-        'completed_at',
+        'work_date',
+        'property_name',
+        'property_number',
+        'detail',
     ];
 
     protected $casts = [

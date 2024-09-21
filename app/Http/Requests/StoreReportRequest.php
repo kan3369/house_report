@@ -14,13 +14,6 @@ class StoreReportRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'address' => (empty($this->latitude) || empty($this->longitude)) ? null : true,
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -34,14 +27,15 @@ class StoreReportRequest extends FormRequest
             "address" => "required",
             "detail" => "required",
             "email" => "nullable|email:rfc,dns",
-            "contact" => "nullable",
             "reported_at" => "nullable|date",
             "status_id" => "sometimes|required|exists:statuses,id",
             "comment" => "nullable",
-            "start_date" => "nullable|date",
-            "end_date" => "nullable|date|exclude_without:start_date|after_or_equal:start_date",
+            "start_time" => 'required|date_format:H:i',
+            "end_time" => 'required|date_format:H:i|after:start_time',
             "completed_at" => "nullable|required_if:status_id,4,5|prohibited_unless:status_id,4,5|date",
             "reason_id" => "nullable|required_if:status_id,5|prohibited_unless:status_id,5|exists:reasons,id",
+            'work_date' => 'required|date', 
+
         ];
     }
 
@@ -53,24 +47,25 @@ class StoreReportRequest extends FormRequest
             'address'      => '住所',
             'detail'        => '内容',
             'email'         => 'メールアドレス',
-            'contact'       => '連絡先',
             'reported_at'   => '報告日',
             'status_id'     => '対応状況',
             'reason_id'     => '非対応理由',
             'comment'       => 'コメント',
-            'start_date'    => '対応予定期間(開始)',
-            'end_date'      => '対応予定期間(終了)',
+            'start_time'    => '開始時間',
+            'end_time'      => '終了時間',
             'schedule_lte'  => '対応予定期間',
             'completed_at'  => '対応完了日',
+            'work_date'  => '実施日',
+
         ];
     }
-    public function messages()
-    {
-        return [
-            'completed_at.required_if' => '対応状況が「対応済み」または「非対応」の場合は:Attributeを入力してください。',
-            'completed_at.prohibited_unless' => '対応状況が「対応済み」または「非対応」でない限り、:Attributeの入力は禁止されています。',
-            'reason_id.required_if' => '対応状況が「非対応」の場合は:Attributeを選択してください。',
-            'reason_id.prohibited_unless' => '対応状況が「非対応」でない限り、:Attributeの入力は禁止されています。',
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'completed_at.required_if' => '対応状況が「対応済み」または「非対応」の場合は:Attributeを入力してください。',
+    //         'completed_at.prohibited_unless' => '対応状況が「対応済み」または「非対応」でない限り、:Attributeの入力は禁止されています。',
+    //         'reason_id.required_if' => '対応状況が「非対応」の場合は:Attributeを選択してください。',
+    //         'reason_id.prohibited_unless' => '対応状況が「非対応」でない限り、:Attributeの入力は禁止されています。',
+    //     ];
+    // }
 }

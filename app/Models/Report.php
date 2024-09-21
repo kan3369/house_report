@@ -24,6 +24,12 @@ class Report extends Model
         'detail',
         'email',
         'reported_at',
+        'address',
+        'start_time',
+        'end_time',
+        'end_date',
+        'work_date',
+
     ];
 
     protected $casts = [
@@ -96,3 +102,4 @@ class Report extends Model
         }
     }
 }
+

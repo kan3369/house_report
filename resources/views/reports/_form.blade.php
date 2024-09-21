@@ -12,7 +12,7 @@
 
             <div class="">
                 <h2 class="">{{ __('物件名') }}</h2>
-                <input type="text" name="property" class="w-full">
+                <input type="text" name="property_name" class="w-full">
             </div>
 
             <div class="">
@@ -65,14 +65,14 @@
 
             <div class="">
                 <h2 class="">{{ __('実施日') }}</h2>
-                <input type="date" name="reported_at" class="w-full"
-                    value="{{ old('reported_at', $report?->reported_at) }}">
+                <input type="date" name="work_date" class="w-full"
+                    value="{{ old('work_date', $report?->work_date) }}">
             </div>
 
             <div class="">
                 <h2 class="">{{ __('実施時間(開始〜完了)') }}</h2>
-                <input type="time" name="start_time" required>
-                <input type="time" name="end_time" required>
+                <input type="time" name="start_time">
+                <input type="time" name="end_time">
             </div>
 
             <div class="">

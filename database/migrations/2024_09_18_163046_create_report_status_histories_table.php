@@ -22,7 +22,6 @@ return new class extends Migration
             $table->foreignId('reason_id')
                 ->nullable()
                 ->constrained();
-            $table->text('property');
             $table->text('address');
             $table->time('start_time');
             $table->time('end_time');

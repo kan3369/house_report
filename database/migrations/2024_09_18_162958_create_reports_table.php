@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('category_id')
                 ->constrained();
             $table->string('image');
-            $table->text('property');
             $table->string('address');
             $table->time('start_time');
             $table->time('end_time');
